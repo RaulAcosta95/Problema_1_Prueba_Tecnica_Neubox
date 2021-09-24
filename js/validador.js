@@ -1,3 +1,4 @@
+// Raúl Acosta 27-09-2021 https://github.com/RaulAcosta95/Problema_1_Prueba_Tecnica_Neubox
 //Formateado para su facil comprensión
 let inputArchivo = document.getElementById('archivo.txt');
 
@@ -22,7 +23,7 @@ function validadorDeArchivo(e){
             //Extraer contenido de txt
             let archivo = e.target.files[0];
             let lector = new FileReader();
-            
+
             lector.onload = function(e) {
               let contenido = e.target.result;
               leerArchivo(contenido)
