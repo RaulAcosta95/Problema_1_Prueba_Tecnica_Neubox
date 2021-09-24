@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(61, 70, 83);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+h1,p{
+    color: rgb(243, 243, 243);
+}
+header h1, p{
+    text-align: center;
+}
+#formInputFile{
+    display: flex;
+    justify-content: center;
+}
+.validación,.validación2{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+#validación,#validación2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(85, 205, 181);
+    width: 80vw;
+    height: 100px;
+    font-size: 40px;
+}
