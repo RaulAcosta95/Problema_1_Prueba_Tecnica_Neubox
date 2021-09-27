@@ -2,6 +2,9 @@
 //Formateado para su facil comprensión
 let inputArchivo = document.getElementById('archivo.txt');
 
+let divValidación = document.getElementById('validación');
+let divValidación2 = document.getElementById('validación2');
+
 inputArchivo.addEventListener('change', validadorDeArchivo, false);
 
 function validadorDeArchivo(e){
@@ -13,8 +16,8 @@ function validadorDeArchivo(e){
         alert('Por favor, sube un archivo con la extensión .txt');
         console.log('Borra el archivo');
         inputArchivo.value = '';
-        let divValidación = document.getElementById('validación');
         divValidación.innerHTML="";
+        divValidación2.innerHTML="";
         return false;
 
     }else{
@@ -40,22 +43,56 @@ function leerArchivo(contenido) {
 
     let líneasContenido = contenido.split('\n');
     let númerosContenido = líneasContenido[0].split(' ');
-    let cantidadPrimeraInstrucción = númerosContenido[0];
-    let cantidadSegundaInstrucción = númerosContenido[1];
-    let cantidadMensaje = númerosContenido[2];
+    let cantidadPrimeraInstrucción = Number(númerosContenido[0]);
+    let cantidadSegundaInstrucción = Number(númerosContenido[1]);
+    let cantidadMensaje = Number(númerosContenido[2]);
     let primeraInstrucción = líneasContenido[1];
     let segundaInstrucción = líneasContenido[2];
     let mensajeEncriptado = líneasContenido[3];
 
+    //Valida que no falte nada
     if(cantidadPrimeraInstrucción == undefined || cantidadSegundaInstrucción == undefined || cantidadMensaje == undefined){
         console.log('Cantidades undefined');
-        return;
+        alert('Cantidades undefined');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
     } else if(primeraInstrucción == undefined || segundaInstrucción == undefined){
         console.log('Instrucciónes undefined');
-        return;
+        alert('Instrucciónes undefined');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
     } else if(mensajeEncriptado == undefined){
         console.log('Mensaje undefined');
-        return;
+        alert('Mensaje undefined');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
+    }
+
+    console.log(typeof cantidadPrimeraInstrucción);
+
+    //Valida que sean datos correctos
+    console.log("Cantidades: " + cantidadPrimeraInstrucción +"  " + cantidadSegundaInstrucción + "  " + cantidadMensaje);
+    if(cantidadPrimeraInstrucción <2 || cantidadPrimeraInstrucción > 50 || isNaN(cantidadSegundaInstrucción)){
+        console.log('Cantidad de la primer instrucción no aceptada');
+        alert('Cantidad de la primer instrucción no aceptada');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
+    } else if(cantidadSegundaInstrucción <2 || cantidadSegundaInstrucción > 50 || isNaN(cantidadSegundaInstrucción)){
+        console.log('Cantidad de la segunda instrucción no aceptada');
+        alert('Cantidad de la segunda instrucción no aceptada');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
+    } else if(cantidadMensaje <3 || cantidadMensaje > 5000 || isNaN(cantidadSegundaInstrucción)){
+        console.log('Cantidad del mensaje no aceptada');
+        alert('Cantidad del mensaje no aceptada');
+        divValidación.innerHTML="";
+        divValidación2.innerHTML="";
+        return false;
     }
 
     console.log('Cantidad Primera Instrucción: ' + cantidadPrimeraInstrucción);
@@ -183,11 +220,9 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
 }
 
 function muestraEnPantallaValidación(mensaje){
-    let divValidación = document.getElementById('validación');
     divValidación.innerHTML=`<p>${mensaje}</p>`
 }
 
 function muestraEnPantallaValidación2(mensaje){
-    let divValidación = document.getElementById('validación2');
-    divValidación.innerHTML=`<p>${mensaje}</p>`
+    divValidación2.innerHTML=`<p>${mensaje}</p>`
 }
