@@ -52,44 +52,59 @@ function leerArchivo(contenido) {
 
     //Valida que no falte nada
     if(cantidadPrimeraInstrucción == undefined || cantidadSegundaInstrucción == undefined || cantidadMensaje == undefined){
+       
         console.log('Cantidades undefined');
         alert('Cantidades undefined');
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
+
     } else if(primeraInstrucción == undefined || segundaInstrucción == undefined){
+
         console.log('Instrucciónes undefined');
         alert('Instrucciónes undefined');
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
+
     } else if(mensajeEncriptado == undefined){
+
         console.log('Mensaje undefined');
         alert('Mensaje undefined');
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
+
     }
 
     console.log(typeof cantidadPrimeraInstrucción);
 
     //Valida que sean datos correctos
     console.log("Cantidades: " + cantidadPrimeraInstrucción +"  " + cantidadSegundaInstrucción + "  " + cantidadMensaje);
+    
     if(cantidadPrimeraInstrucción <2 || cantidadPrimeraInstrucción > 50 || isNaN(cantidadSegundaInstrucción)){
+
         console.log('Cantidad de la primer instrucción no aceptada');
         alert('Cantidad de la primer instrucción no aceptada');
+
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
+
     } else if(cantidadSegundaInstrucción <2 || cantidadSegundaInstrucción > 50 || isNaN(cantidadSegundaInstrucción)){
+
         console.log('Cantidad de la segunda instrucción no aceptada');
         alert('Cantidad de la segunda instrucción no aceptada');
+        
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
+
     } else if(cantidadMensaje <3 || cantidadMensaje > 5000 || isNaN(cantidadSegundaInstrucción)){
+
         console.log('Cantidad del mensaje no aceptada');
         alert('Cantidad del mensaje no aceptada');
+
         divValidación.innerHTML="";
         divValidación2.innerHTML="";
         return false;
@@ -128,7 +143,9 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
             //Previene que si hay muchas letras al principio, no lo tome como malo
             //por motivo que solo puede repetirse 3 veces
             if(iPrimInst==0){
+
                 while(letrasMensajeEncriptado[iEncript] == letrasPrimeraInstrucción[iPrimInst]){
+
                     if(letrasMensajeEncriptado[iEncript] == letrasMensajeEncriptado[iEncript+1]){
                         iEncript++;
                     }
@@ -149,9 +166,11 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
 
             if(letrasMensajeEncriptado[iEncript] == letrasPrimeraInstrucción[iPrimInst]){
                 iEncript++;
+
                 if(iPrimInst == letrasPrimeraInstrucción.length-1){
                     hayInstrucciónEncriptada = true;
                 }
+
             } else{
                 break;
             }
@@ -169,7 +188,9 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
             //Previene que si hay muchas letras al principio, no lo tome como malo
             //por motivo que solo puede repetirse 3 veces
             if(iSegInst==0){
+
                 while(letrasMensajeEncriptado[iEncript] == letrasSegundaInstrucción[iSegInst]){
+
                     if(letrasMensajeEncriptado[iEncript] == letrasMensajeEncriptado[iEncript+1]){
                         iEncript++;
                     }
@@ -190,6 +211,7 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
 
             if(letrasMensajeEncriptado[iEncript] == letrasSegundaInstrucción[iSegInst]){
                 iEncript++;
+
                 if(iSegInst == letrasSegundaInstrucción.length-1){
                     hayInstrucciónEncriptada2 = true;
                 }
@@ -204,21 +226,29 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
 
     let text = "";
     if(hayInstrucciónEncriptada){
+
         console.log('SI');
         muestraEnPantallaValidación('SI');
+
         text +='SI\n';
     } else{
+
         console.log('NO');
         muestraEnPantallaValidación('NO');
+
         text +='NO\n';
     }
     if(hayInstrucciónEncriptada2){
+
         console.log('SI');
         muestraEnPantallaValidación2('SI');
+
         text +='SI';
     } else{
+
         console.log('NO');
         muestraEnPantallaValidación2('NO');
+
         text +='NO';
     }
     
@@ -234,8 +264,10 @@ function muestraEnPantallaValidación2(mensaje){
 }
 
 function generaBotonDescarga(text){
+
     let divDescarga = document.getElementById('divDescarga');
     divDescarga.innerHTML = `<input type="button" id="dwn-btn" value="Descargar archivo"/>`;
+
     // Start file download.
     document.getElementById("dwn-btn").addEventListener("click", function(){
         // Generate download of hello.txt file with some content
@@ -245,11 +277,19 @@ function generaBotonDescarga(text){
 }
 
 function download(filename, text) {
+
     let element = document.createElement('a');
+
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+
     element.setAttribute('download', filename);
+
     element.style.display = 'none';
+
     document.body.appendChild(element);
+
     element.click();
+    
     document.body.removeChild(element);
+
 }
