@@ -9,7 +9,7 @@ h1,p{
 header h1, p{
     text-align: center;
 }
-#formInputFile{
+#formInputFile, #divDescarga{
     display: flex;
     justify-content: center;
 }

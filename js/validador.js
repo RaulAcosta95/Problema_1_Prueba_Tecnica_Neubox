@@ -202,21 +202,27 @@ function identificaSiHayInstrucción(primeraInstrucción, segundaInstrucción, m
     }
 
 
-
+    let text = "";
     if(hayInstrucciónEncriptada){
         console.log('SI');
         muestraEnPantallaValidación('SI');
+        text +='SI\n';
     } else{
         console.log('NO');
         muestraEnPantallaValidación('NO');
+        text +='NO\n';
     }
     if(hayInstrucciónEncriptada2){
         console.log('SI');
         muestraEnPantallaValidación2('SI');
+        text +='SI';
     } else{
         console.log('NO');
         muestraEnPantallaValidación2('NO');
+        text +='NO';
     }
+    
+    generaBotonDescarga(text);
 }
 
 function muestraEnPantallaValidación(mensaje){
@@ -225,4 +231,25 @@ function muestraEnPantallaValidación(mensaje){
 
 function muestraEnPantallaValidación2(mensaje){
     divValidación2.innerHTML=`<p>${mensaje}</p>`
+}
+
+function generaBotonDescarga(text){
+    let divDescarga = document.getElementById('divDescarga');
+    divDescarga.innerHTML = `<input type="button" id="dwn-btn" value="Descargar archivo"/>`;
+    // Start file download.
+    document.getElementById("dwn-btn").addEventListener("click", function(){
+        // Generate download of hello.txt file with some content
+        let filename = "resultado.txt";
+        download(filename, text);
+    }, false);
+}
+
+function download(filename, text) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
